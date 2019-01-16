@@ -14,7 +14,7 @@ var TodoList = createClass({
     var renderTodos = () => {
       if(todos.length ===0){
         return (
-          <p className="container__message">Nothing to do</p>
+          <p className="container_message">Nothing to do</p>
         )
       }
       return todos.map(todo => {

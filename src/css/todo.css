@@ -20,8 +20,23 @@
 .todo .todo-brief-information {
   grid-column: 1/5;
 }
+
+.todo .todo-trash {
+  position: relative;
+  grid-column: 5/6;
+}
+
+.todo .todo-trash button {
+  font-size: 70%;
+        position: absolute;
+        right: 0;
+        width: 5rem;
+        max-width: 90%;
+        text-align: center;
+}
+
 .todo-complete {
-  background: rebeccapurple
+  background: rebeccapurple 
 }
 
 

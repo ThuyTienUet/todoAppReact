@@ -9,11 +9,11 @@ var TodoSearch = createClass({
     },
     render: function(){
         return(
-            <div className="container__header">
-                <div>
+            <div className="container_header">
+                <div className="search">
                     <input type="search" ref='searchText' placeholder='Search todo' onChange={this.handleSearch}/>
                 </div>
-                <div>
+                <div className="show">
                     <input type='checkbox' ref='showCompleted' onChange={this.handleSearch}/> Show completed todo
                 </div>
             </div>

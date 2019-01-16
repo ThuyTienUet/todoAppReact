@@ -16,7 +16,7 @@
     margin: 0 auto;
 }
 
-.container__header{
+.container_header{
     border-bottom: 1px solid #eeeeee;
     padding: 1rem;
     /* label{
@@ -28,13 +28,33 @@
         display: flex;
     } */
 }
+.container_header .search input{
+    width: 100%;
+    border-radius: 4px;
+    height: 35px;
+}
 
-.container__footer{
+.container_header .show {
+    margin-top: 12px;
+}
+.container_footer{
     padding: 1rem 1rem 0 1rem;
     border-top: 1px solid #eeeeee;
 }
+.container_footer input {
+    width: 100%;
+    border-radius: 4px;
+    height: 35px;
+    margin-bottom: 12px;
+}
 
-.container__message{
+.container_footer button {
+    width: 100%;
+    background: #6ab4ef;
+    height: 35px;
+}
+
+.container_message{
     color: #aaa;
     margin: 2rem auto;
     text-align: center;
