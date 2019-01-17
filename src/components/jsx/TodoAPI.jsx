@@ -1,6 +1,11 @@
-var $ = require("jquery");
+// import axios from 'axios';
 
-var filterSearchText = function(todos, searchText) {
+var $ = require("jquery");
+// import React from 'react';
+
+var axios = require("axios");
+
+var filterSearchText = function (todos, searchText) {
   return todos.filter(todo => {
     if (todo.text.toLowerCase().includes(searchText)) {
       return true;
@@ -9,7 +14,7 @@ var filterSearchText = function(todos, searchText) {
   });
 };
 
-var filterShowCompleted = function(todos, showCompleted) {
+var filterShowCompleted = function (todos, showCompleted) {
   var filtershowCompleted = [];
   if (showCompleted) {
     filtershowCompleted = todos;
@@ -17,50 +22,60 @@ var filterShowCompleted = function(todos, showCompleted) {
     filtershowCompleted = todos.filter(todo => {
       if (!todo.completed) {
         return true;
-      } 
+      }
     });
   }
   return filtershowCompleted;
 };
-var filterSortTodos = function(todos){
-    function compare(todoa, todob){
-        if(todoa.completed === true && todob.completed === false ){
-            return 1;
-        } else {
-            return -1;
-        }
+var filterSortTodos = function (todos) {
+  function compare(todoa, todob) {
+    if (todoa.completed === true && todob.completed === false) {
+      return 1;
+    } else {
+      return -1;
     }
-    var sorttodos = todos.sort(compare);
-    return sorttodos;
+  }
+  var sorttodos = todos.sort(compare);
+  return sorttodos;
 }
-var toString = function(todos){
+var toString = function (todos) {
   return JSON.stringify(todos);
 }
 module.exports = {
-  getTodos: function() {
+  getTodos: function () {
+    console.log('abc');
+    
     var todos = JSON.parse(localStorage.getItem("todos"));
     return $.isArray(todos) ? todos : [];
+    axios.post('192.168.0.111:3001/api/todo/list', {
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
-  setTodos: function(todos) {
+  setTodos: function (todos) {
     if ($.isArray(todos)) {
       localStorage.setItem("todos", JSON.stringify(todos));
     }
   },
-  getTodo: function(id){
+  getTodo: function (id) {
     var todos = this.getTodos();
     var thisTodo = undefined;
-    todos.forEach((todo)=>{
-      if(todo.id === id){
-        thisTodo = todo; 
+    todos.forEach((todo) => {
+      if (todo.id === id) {
+        thisTodo = todo;
         return;
       }
     })
     return thisTodo;
   },
-  setTodo: function(updateTodo){
+  setTodo: function (updateTodo) {
     var todos = this.getTodos();
-    var newTodos = todos.map(todo=>{
-      if(todo.id === updateTodo.id){
+    var newTodos = todos.map(todo => {
+      if (todo.id === updateTodo.id) {
         return updateTodo;
       } else {
         return todo;
@@ -70,7 +85,7 @@ module.exports = {
     this.setTodos(newTodos);
     return true;
   },
-  filterTodos: function(todos, showCompleted, searchText) {
+  filterTodos: function (todos, showCompleted, searchText) {
     var filtertodos = todos;
     // console.log(JSON.stringify(filtertodos));
     filtertodos = filterShowCompleted(filtertodos, showCompleted);

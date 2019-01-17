@@ -1,4 +1,4 @@
-import Main from "./components/Main";
+import Main from "./components/js/Main";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
@@ -8,7 +8,7 @@ import './css/container.css';
 import './css/page-title.css';
 import './css/todo.css';
 
-import TodoApp from "./components/TodoApp";
+import TodoApp from "./components/js/TodoApp";
 
 
 ReactDOM.render(

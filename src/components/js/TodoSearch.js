@@ -1,13 +1,17 @@
-import React from 'react';
-import createClass from 'create-react-class';
+import React, { Component } from 'react';
 
-var TodoSearch = createClass({
-    handleSearch: function(){
+class TodoSearch extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleSearch = this.handleSearch.bind(this);
+    }
+    handleSearch(){
         var searchText = this.refs.searchText.value;
         var showCompleted = this.refs.showCompleted.checked;
         return this.props.onSearch(searchText,showCompleted);
-    },
-    render: function(){
+    }
+    render(){
         return(
             <div className="container_header">
                 <div className="search">
@@ -19,6 +23,6 @@ var TodoSearch = createClass({
             </div>
         );
     }
-});
+}
 
 export default TodoSearch;

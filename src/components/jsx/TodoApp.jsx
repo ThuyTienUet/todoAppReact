@@ -16,7 +16,7 @@ var TodoApp = createClass({
       todos: TodoAPI.getTodos()
     };
   },
-  handleAddTodo: function(text) {
+  handleAddTodo: function(text) { 
     this.setState({
       todos: [
         ...this.state.todos,
@@ -24,7 +24,6 @@ var TodoApp = createClass({
           id: uuid(),
           text: text,
           completed: false,
-
         }
       ]
     });
@@ -68,13 +67,11 @@ var TodoApp = createClass({
       <div>
         <h1 className="page-title">Todo App</h1>
         <div className="row">
-          <div className="column small-centered small-11 medium-6 large-5">
             <div className="container">
               <TodoSearch onSearch={this.handleSearch} />
               <TodoList todos={filterTodos} onToggle={this.handleToggle} onRemove={this.handleRemove} />
               <AddTodo onAddTodo={this.handleAddTodo} />
             </div>
-          </div>
         </div>
       </div>
     );

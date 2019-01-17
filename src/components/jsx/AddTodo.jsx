@@ -22,7 +22,7 @@ var AddTodo = createClass({
             ref="todoText"
             placeholder="what do you need to do"
           />
-          <button className="button expanded">Add Todo</button>
+          <button>Add Todo</button>
         </form>
       </div>
     );
