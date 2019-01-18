@@ -5,7 +5,7 @@ import axios from 'axios';
 import AddTodo from './AddTodo.js';
 import TodoList from './TodoList.js';
 import TodoSearch from './TodoSearch.js';
-import TodoAPI from './TodoAPI.js';
+import TodoAPI from '../../apis/TodoAPI';
 
 class TodoApp extends Component {
 
@@ -22,47 +22,36 @@ class TodoApp extends Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
 
-  componentDidMount() {
-    console.log('mount');
-
+  componentWillMount() {
     this.getTodoList().then(value => {
       console.log(value);
     })
   }
 
   getTodoList = async () => {
-    const a = await TodoAPI.getTodos();
+    const todoList = await TodoAPI.getTodos();
     this.setState({
-      todos: a
+      todos: todoList
     })
-    // console.log(this.state);
-    // a.then(value => {
-    //   console.log(value);
-    //   this.setState({
-    //     todos: value
-    //   }, () => {
-    //     console.log(this.state);
-    //   })
-    // })
-
   }
 
-  handleAddTodo(text) {
-    console.log('add todo');
-
+  handleAddTodo = async (text) => {
+    const todoNew = await TodoAPI.createTodo(text);
     this.setState({
       todos: [
         ...this.state.todos,
         {
-          id: uuid(),
-          text: text,
+          id: todoNew.id,
+          text: todoNew.content,
           completed: false,
         }
       ]
     });
   }
 
-  handleToggle(id) {
+  handleToggle = async (id) => {
+    await TodoAPI.updateTodo(id);
+
     var updatedTodos = this.state.todos.map(todo => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
@@ -81,7 +70,8 @@ class TodoApp extends Component {
     });
   }
 
-  handleRemove(id) {
+  handleRemove = async (id) => {
+    await TodoAPI.deleteTodo(id);
     var newTodos = this.state.todos.filter((todo) => {
       if (todo.id === id) {
         return false;
@@ -99,16 +89,19 @@ class TodoApp extends Component {
 
   render() {
     var { todos, showCompleted, searchText } = this.state;
-    console.log(todos);
-
-    // var filterTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+    var filterTodos = [];
+    if (todos) {
+      filterTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+    } 
+   console.log();
+   
     return (
       <div>
         <h1 className="page-title">Todo App</h1>
         <div className="row">
           <div className="container">
             <TodoSearch onSearch={this.handleSearch} />
-            <TodoList todos={todos} onToggle={this.handleToggle} onRemove={this.handleRemove} />
+            <TodoList todos={filterTodos} onToggle={this.handleToggle} onRemove={this.handleRemove} />
             <AddTodo onAddTodo={this.handleAddTodo} />
           </div>
         </div>

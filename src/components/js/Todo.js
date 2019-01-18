@@ -26,7 +26,7 @@ class Todo extends Component {
           <div>
             <input type="checkbox" checked={completed} onChange={a => { }} />
           </div>
-          <div>
+          <div className="todo-subtext">
             <p>{text}</p>
           </div>
         </div>
