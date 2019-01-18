@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, FormControl } from 'react-bootstrap';
 
 class AddTodo extends Component {
 
@@ -9,25 +10,27 @@ class AddTodo extends Component {
   
   handleSubmit(event) {
     event.preventDefault();
-    var todoText = this.refs.todoText.value;
+    var todoText = this.input.value;
+
     if (todoText.length > 0) {
-      this.refs.todoText.value = "";
+      this.input.value = "";
       this.props.onAddTodo(todoText);
     } else {
-      this.refs.todoText.focus();
+      this.input.focus();
     }
   }
   
   render() {
     return (
       <div className="container_footer">
-        <form onSubmit={this.handleSubmit}>
-          <input
+        <form >
+          <FormControl
             type="text"
-            ref="todoText"
-            placeholder="what do you need to do"
+            inputRef={(ref) => {this.input = ref}}
+            placeholder="Add Todo"
           />
-          <button>Add Todo</button>
+          {/* <button>Add Todo</button> */}
+          <Button bsStyle="primary" onClick={this.handleSubmit}>Add Todo</Button>
         </form>
       </div>
     );

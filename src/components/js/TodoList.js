@@ -24,7 +24,7 @@ class TodoList extends Component {
             )
           }
           return todos.map(todo => {
-            return <Todo key={todo.id}{...todo} onToggle={this.handleToggle} onRemove={this.handleRemove}/>;
+            return <Todo key={todo._id}{...todo} onToggle={this.handleToggle} onRemove={this.handleRemove}/>;
           });
         };
     

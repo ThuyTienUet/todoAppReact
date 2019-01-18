@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import uuid from "uuid/v4";
-import axios from 'axios';
 
 import AddTodo from './AddTodo.js';
 import TodoList from './TodoList.js';
@@ -22,9 +20,9 @@ class TodoApp extends Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getTodoList().then(value => {
-      console.log(value);
+      // console.log(value);
     })
   }
 
@@ -41,8 +39,8 @@ class TodoApp extends Component {
       todos: [
         ...this.state.todos,
         {
-          id: todoNew.id,
-          text: todoNew.content,
+          _id: todoNew._id,
+          text: todoNew.text,
           completed: false,
         }
       ]
@@ -53,7 +51,7 @@ class TodoApp extends Component {
     await TodoAPI.updateTodo(id);
 
     var updatedTodos = this.state.todos.map(todo => {
-      if (todo.id === id) {
+      if (todo._id === id) {
         todo.completed = !todo.completed;
       }
       return todo;
@@ -73,7 +71,7 @@ class TodoApp extends Component {
   handleRemove = async (id) => {
     await TodoAPI.deleteTodo(id);
     var newTodos = this.state.todos.filter((todo) => {
-      if (todo.id === id) {
+      if (todo._id === id) {
         return false;
       }
       return true;
@@ -89,17 +87,13 @@ class TodoApp extends Component {
 
   render() {
     var { todos, showCompleted, searchText } = this.state;
-    var filterTodos = [];
-    if (todos) {
-      filterTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
-    } 
-   console.log();
+    var filterTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
    
     return (
-      <div>
+      <div className="container">
         <h1 className="page-title">Todo App</h1>
         <div className="row">
-          <div className="container">
+          <div >
             <TodoSearch onSearch={this.handleSearch} />
             <TodoList todos={filterTodos} onToggle={this.handleToggle} onRemove={this.handleRemove} />
             <AddTodo onAddTodo={this.handleAddTodo} />

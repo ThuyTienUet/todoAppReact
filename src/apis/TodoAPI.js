@@ -1,21 +1,15 @@
-//  // import axios from 'axios';
-
-// var $ = require("jquery");
-// // import React from 'react';
-
-// var axios = require("axios");
-
-// 
-// };
-
 import Axios from 'axios';
+const URL = 'http://localhost:3001/api/todo/';
 
 var filterSearchText = function (todos, searchText) {
+
   return todos.filter(todo => {
-    if (todo.text.toLowerCase().includes(searchText)) {
-      return true;
+    if (todo.text) {
+      if (todo.text.toLowerCase().includes(searchText)) {
+        return true;
+      }
+      return false;
     }
-    return false;
   });
 };
 
@@ -43,15 +37,12 @@ var filterSortTodos = function (todos) {
   var sorttodos = todos.sort(compare);
   return sorttodos;
 }
-var toString = function (todos) {
-  return JSON.stringify(todos);
-}
 
 export default {
   getTodos: () => {
     return Axios({
       method: 'GET',
-      url: 'http://localhost:3001/api/todo/list',
+      url: URL + 'list',
       data: null
     }).then(res => {
       return res.data.listTodo;
@@ -65,7 +56,7 @@ export default {
   createTodo: (text) => {
     return Axios({
       method: 'POST',
-      url: 'http://localhost:3001/api/todo/new',
+      url: URL + 'new',
       data: {
         text: text
       }
@@ -80,7 +71,7 @@ export default {
   deleteTodo: (id) => {
     return Axios({
       method: 'DELETE',
-      url: 'http://localhost:3001/api/todo/delete',
+      url: URL + 'delete',
       data: {
         id: id
       }
@@ -95,7 +86,7 @@ export default {
   updateTodo: (id) => {
     return Axios({
       method: 'PUT',
-      url: 'http://localhost:3001/api/todo/update',
+      url: URL + 'update',
       data: {
         id: id
       }

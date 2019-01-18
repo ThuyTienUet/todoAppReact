@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from 'react-bootstrap';
 
 class Todo extends Component {
   constructor(props) {
@@ -8,12 +9,12 @@ class Todo extends Component {
   }
 
   handleToggle() {
-    return this.props.onToggle(this.props.id);
+    return this.props.onToggle(this.props._id);
   }
 
   handleRemove() {
-    var { id } = this.props;
-    return this.props.onRemove(id);
+    var { _id } = this.props;
+    return this.props.onRemove(_id);
   }
 
   render() {
@@ -31,9 +32,12 @@ class Todo extends Component {
           </div>
         </div>
         <div className="todo-trash">
-          <button className="button" onClick={this.handleRemove}>
+          {/* <button className="button" onClick={this.handleRemove}>
             Remove
-              </button>
+              </button> */}
+          <Button bsStyle="danger" onClick={this.handleRemove}>
+            Remove
+              </Button>
         </div>
       </div>
     );
