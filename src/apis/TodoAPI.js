@@ -2,7 +2,6 @@ import Axios from 'axios';
 const URL = 'http://localhost:3001/api/todo/';
 
 var filterSearchText = function (todos, searchText) {
-
   return todos.filter(todo => {
     if (todo.text) {
       if (todo.text.toLowerCase().includes(searchText)) {
