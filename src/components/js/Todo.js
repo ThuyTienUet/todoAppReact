@@ -23,9 +23,9 @@ class Todo extends Component {
 
     return (
       <div className={todoClassName}>
-        <div className="todo-brief-information" onClick={this.handleToggle}>
-          <div>
-            <input type="checkbox" checked={completed} onChange={a => { }} />
+        <div className="todo-brief-information" >
+          <div >
+            <input type="checkbox" checked={completed} onClick={this.handleToggle} onChange={a => { }} />
           </div>
           <div className="todo-subtext">
             <p>{text}</p>

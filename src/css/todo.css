@@ -13,9 +13,9 @@
   margin-right: 0rem;
 }
 
-.todo .todo-brief-information :hover {
+/* .todo .todo-brief-information :hover {
   background: #f0f0f0;
-}
+} */
 
 .todo .todo-brief-information {
   grid-column: 1/5;
